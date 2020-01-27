@@ -1,0 +1,109 @@
+setwd("C:/Users/Morgon/Downloads/Senior Year/Winter/IEMS 308/Medicare_Provider_Util_Payment_PUF_CY2017")
+> Medicare_Provider_Util_Payment_PUF_CY2017 <- read.delim("C:/Users/Morgon/Downloads/Senior Year/Winter/IEMS 308/Medicare_Provider_Util_Payment_PUF_CY2017/Medicare_Provider_Util_Payment_PUF_CY2017.txt")
+>   View(Medicare_Provider_Util_Payment_PUF_CY2017)
+> #Medicare allowed amount
+> x<-Medicare_Provider_Util_Payment_PUF_CY2017$average_Medicare_allowed_amt
+> summary(x)
+    Min.  1st Qu.   Median     Mean  3rd Qu.     Max.     NA's 
+    0.00    24.26    65.00   101.60   113.50 56684.35        1 
+> IQR(x, na.rm=T) #89.37
+[1] 89.24363
+> #Submitted Charge Amount
+> x<-Medicare_Provider_Util_Payment_PUF_CY2017$average_submitted_chrg_amt
+> summary(x)
+    Min.  1st Qu.   Median     Mean  3rd Qu.     Max.     NA's 
+     0.0     58.0    146.0    351.6    300.0 100000.0        1 
+> IQR(x, na.rm=T) #241.75
+[1] 242
+> #Average Medicare Standard Amount
+> x<-Medicare_Provider_Util_Payment_PUF_CY2017$average_Medicare_standard_amt
+> summary(x)
+    Min.  1st Qu.   Median     Mean  3rd Qu.     Max.     NA's 
+    0.00    20.09    47.76    78.22    85.25 44439.10        1 
+> IQR(x, na.rm=T) #65.09
+[1] 65.15917
+> #Average Medicare Payment Amount
+> x<-Medicare_Provider_Util_Payment_PUF_CY2017$average_Medicare_payment_amt
+> summary(x)
+    Min.  1st Qu.   Median     Mean  3rd Qu.     Max.     NA's 
+    0.00    19.28    46.96    77.53    85.19 44439.10        1 
+> IQR(x, na.rm=T) #65.96
+[1] 65.9108
+> #Medicare Allowed Amt
+> ma<-Medicare_Provider_Util_Payment_PUF_CY2017$average_Medicare_allowed_amt
+> ma<-ma[which((ma<=3*IQR(ma, na.rm=T)+quantile(ma,0.75, na.rm=T))&(ma>=quantile(ma,0.25, na.rm=T)-3*IQR(ma, na.rm=T)))]
+> summary(ma)
+    Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+  0.0001  23.7778  62.0400  76.4294 108.9200 381.2346 
+> IQR(ma)
+[1] 85.1422
+> #Submitted CHarge
+> sc<-Medicare_Provider_Util_Payment_PUF_CY2017$average_submitted_chrg_amt
+> sc<-sc[which((sc<=3*IQR(sc, na.rm=T)+quantile(sc,0.75, na.rm=T))&(sc>=quantile(sc,0.25, na.rm=T)-3*IQR(sc, na.rm=T)))]
+> summary(sc)
+     Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
+   0.0001   53.0000  132.0000  193.0320  252.0000 1026.0000 
+> IQR(sc)
+[1] 199
+> #Medicare Standard
+> ms<-Medicare_Provider_Util_Payment_PUF_CY2017$average_Medicare_standard_amt
+> ms<-ms[which((ms<=3*IQR(ms, na.rm=T)+quantile(ms,0.75, na.rm=T))&(ms>=quantile(ms,0.25, na.rm=T)-3*IQR(ms, na.rm=T)))]
+> summary(ms)
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+   0.00   19.41   46.26   58.01   82.22  280.73 
+> IQR(ms)
+[1] 62.80745
+> #Medicare Payment
+> mp<-Medicare_Provider_Util_Payment_PUF_CY2017$average_Medicare_payment_amt
+> mp<-mp[which((mp<=3*IQR(mp, na.rm=T)+quantile(mp,0.75, na.rm=T))&(mp>=quantile(mp,0.25, na.rm=T)-3*IQR(mp, na.rm=T)))]
+> summary(mp)
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+   0.00   18.73   45.35   57.55   80.75  282.93 
+> IQR(mp)
+[1] 62.01828
+> #Line Service Count
+> x<-Medicare_Provider_Util_Payment_PUF_CY2017$line_srvc_cnt
+> summary(x)
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+      2      21      43     245     117 7195536       1 
+> IQR(x, na.rm=T)
+[1] 96
+> #Unique Beneficiary
+> x<-Medicare_Provider_Util_Payment_PUF_CY2017$bene_unique_cnt
+> summary(x)
+    Min.  1st Qu.   Median     Mean  3rd Qu.     Max.     NA's 
+    11.0     17.0     32.0     87.8     75.0 792873.0        1 
+> IQR(x, na.rm=T)
+[1] 58
+> #Beneficiary/Day
+> x<-Medicare_Provider_Util_Payment_PUF_CY2017$bene_day_srvc_cnt
+> summary(x)
+     Min.   1st Qu.    Median      Mean   3rd Qu.      Max.      NA's 
+     11.0      20.0      40.0     140.3     106.0 1504215.0         1 
+> IQR(x, na.rm=T)
+[1] 86
+> #LS Count
+> ls<-Medicare_Provider_Util_Payment_PUF_CY2017$line_srvc_cnt
+> ls<-ls[which((ls<=3*IQR(ls, na.rm=T)+quantile(ls,0.75, na.rm=T))&(ls>=quantile(ls,0.25, na.rm=T)-3*IQR(ls, na.rm=T)))]
+> summary(ls)
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+   2.40   20.00   38.00   71.41   89.00  405.00 
+> IQR(ls)
+[1] 69
+> #Beneficiary Unique
+> bu<-Medicare_Provider_Util_Payment_PUF_CY2017$bene_unique_cnt
+> bu<-bu[which((bu<=3*IQR(bu, na.rm=T)+quantile(bu,0.75, na.rm=T))&(bu>=quantile(bu,0.25, na.rm=T)-3*IQR(bu, na.rm=T)))]
+> summary(bu)
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  11.00   17.00   30.00   50.16   64.00  249.00 
+> IQR(bu)
+[1] 47
+> #Beneficiary/Day
+> bd<-Medicare_Provider_Util_Payment_PUF_CY2017$bene_day_srvc_cnt
+> bd<-bd[which((bd<=3*IQR(bd, na.rm=T)+quantile(bd,0.75, na.rm=T))&(bd>=quantile(bd, 0.25, na.rm=T)-3*IQR(bd, na.rm=T)))]
+> summary(bd)
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  11.00   19.00   36.00   66.38   83.00  364.00 
+> IQR(bd)
+[1] 64
+> 
